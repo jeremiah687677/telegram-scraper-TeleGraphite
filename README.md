@@ -18,7 +18,7 @@ A tool to fetch and save posts from public Telegram channels.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/telegraphite.git
+git clone https://github.com/hamodywe/telegraphite.git
 cd telegraphite
 
 # Install the package
