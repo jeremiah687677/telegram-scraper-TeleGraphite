@@ -2,6 +2,7 @@
 
 
 A tool to fetch and save posts from public Telegram channels.
+![TeleGraphite Screenshot](logo.png)
 
 ## Features
 
