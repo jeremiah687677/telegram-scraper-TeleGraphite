@@ -1,0 +1,36 @@
+# TeleGraphite Configuration
+
+# Directory to store posts and media
+data_dir: data
+
+# Path to file containing channel usernames
+channels_file: channels.txt
+
+# Maximum number of posts to fetch per channel
+limit: 10
+
+# Interval between fetches in seconds (for continuous mode)
+interval: 3600
+
+# Filters for posts
+filters:
+  # Keywords to filter posts (only fetch posts containing these keywords)
+  keywords:
+    - important
+    - announcement
+  # Only fetch posts containing media (photos, documents)
+  media_only: false
+  # Only fetch posts containing text
+  text_only: false
+
+# Schedule for fetching posts (for continuous mode)
+schedule:
+  # Days of the week to run the fetcher
+  days:
+    - monday
+    - wednesday
+    - friday
+  # Times of day to run the fetcher (HH:MM format)
+  times:
+    - "09:00"
+    - "18:00"

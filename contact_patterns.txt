@@ -1,0 +1,31 @@
+# Email, Phone Number, and Link Patterns
+# Use this file to define email, phone number, and link patterns for extraction
+
+# Email patterns (must contain @ and be in English)
+[email_patterns]
+.*@.*
+
+# International phone number patterns
+[phone_patterns]
+# International format with + prefix
+\+[1-9][0-9]{1,14}
+# International format with 00 prefix
+00[1-9][0-9]{1,14}
+
+^07[0-9]{8}$
+07[0-9]{8}\b
+# North American format
+[1]?[\s-]?\(?[0-9]{3}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{4}
+# European format
+[0-9]{2,4}[\s-]?[0-9]{2,4}[\s-]?[0-9]{2,4}[\s-]?[0-9]{2,4}
+# Generic local format - minimum 8 digits to avoid short numbers
+[0-9]{8,15}
+
+# Link patterns
+[link_patterns]
+# HTTP/HTTPS URLs
+https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+[\w\-\._~:/?#[\]@!$&'()*+,;=]*
+# URLs with www but no protocol
+www\.(?:[-\w.]|(?:%[\da-fA-F]{2}))+[\w\-\._~:/?#[\]@!$&'()*+,;=]*
+# Common URL shorteners without protocol
+(?:bit\.ly|t\.co|goo\.gl|tinyurl\.com)/[\w\-\._~:/?#[\]@!$&'()*+,;=]*
