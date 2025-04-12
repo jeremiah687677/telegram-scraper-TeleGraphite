@@ -1,4 +1,5 @@
-# TeleGraphite
+# TeleGraphite: Telegram Scraper & JSON Exporter & telegram chanels scraper
+
 
 A tool to fetch and save posts from public Telegram channels.
 
@@ -6,7 +7,7 @@ A tool to fetch and save posts from public Telegram channels.
 
 - Fetch posts from multiple Telegram channels
 - Save posts as JSON files (with contact exports: emails, phone numbers, links)
-- Download and save media files (photos, documents)
+- Download and save media files (photos, documents videos)
 - Deduplicate posts to avoid saving the same content twice
 - Run once or continuously with a specified interval
 - Filter posts by keywords or content type (text-only, media-only)
